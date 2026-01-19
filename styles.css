@@ -475,34 +475,30 @@ header::after {
     box-sizing: border-box;
 }
 
-/* =========================
-   NAV + HAMBURGER (FIXED)
-   ========================= */
+/* ===== NAV BASE ===== */
 
-/* Base nav */
 nav {
     position: relative;
 }
 
-/* Menu desktop */
 .nav-menu {
     list-style: none;
     display: flex;
     gap: 25px;
 }
 
-/* Hidden checkbox */
+/* ===== HIDDEN CHECKBOX ===== */
 #nav-toggle {
     display: none;
 }
 
-/* Hamburger icon */
+/* ===== HAMBURGER ===== */
 .hamburger {
     display: none;
     flex-direction: column;
     gap: 6px;
     cursor: pointer;
-    z-index: 300;
+    z-index: 200;
 }
 
 .hamburger span {
@@ -510,18 +506,12 @@ nav {
     height: 3px;
     background: #FFD700;
     border-radius: 2px;
-    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-/* =========================
-   MOBILE NAV
-   ========================= */
+/* ===== MOBILE FIX ===== */
 @media (max-width: 768px) {
 
-    .hamburger {
-        display: flex;
-    }
-
+    /* Hide desktop menu */
     .nav-menu {
         display: none;
         position: absolute;
@@ -536,8 +526,13 @@ nav {
         box-shadow: 0 10px 30px rgba(0,0,0,0.6);
     }
 
-    /* 🔑 THIS IS THE FIX */
-    nav input#nav-toggle:checked ~ .nav-menu {
+    /* Show hamburger */
+    .hamburger {
+        display: flex;
+    }
+
+    /* SHOW MENU WHEN CHECKED */
+    #nav-toggle:checked + .hamburger + .nav-menu {
         display: flex;
     }
 }
