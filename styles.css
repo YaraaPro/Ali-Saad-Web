@@ -1,55 +1,9 @@
 /* General */
-head {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
-}
-
 body {
     background-color: #221402;
     color: #F5F5F5;
     line-height: 1.6;
 }
-
-/* Hamburger */
-.hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    gap: 5px;
-}
-
-.hamburger span {
-    height: 3px;
-    width: 25px;
-    background: #FFD700;
-    border-radius: 2px;
-}
-
-/* Mobile Nav */
-@media (max-width: 768px) {
-    nav ul {
-        flex-direction: column;
-        gap: 15px;
-        display: none; /* hidden by default */
-    }
-
-    nav ul.active {
-        display: flex;
-        background: #1B1B17;
-        position: absolute;
-        top: 80px;
-        right: 20px;
-        padding: 20px;
-        border-radius: 10px;
-    }
-
-    .hamburger {
-        display: flex;
-    }
-}
-
 
 /* Links */
 a {
@@ -101,19 +55,6 @@ header {
     padding: 20px 0;
 }
 
-nav {
-    position: relative;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 25px;
-}
-nav ul li a.active {
-    color: #FFD700;
-    font-weight: bold;
-}
 
 /* ===== LOGO BASE ===== */
 .logo img {
@@ -291,15 +232,7 @@ footer {
         gap: 30px;
     }
 
-  nav {
-    position: relative;
-}
 
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 25px;
-}
 
     .hero h1 {
         font-size: 2rem;
@@ -307,20 +240,7 @@ nav ul {
     }
 }
 
-/* ===== MOBILE NAV FIX ===== */
-@media (max-width: 768px) {
 
-    nav ul {
-        display: none; /* HIDE normal menu */
-        flex-direction: column;
-        background: #1B1B17;
-        position: absolute;
-        top: 90px;
-        right: 0;
-        padding: 20px;
-        border-radius: 12px;
-        border: 1
-    }}
 
     /* ===== PULSE + GLOW ICONS ===== */
 
@@ -548,3 +468,76 @@ header::after {
     }
 }
 
+/* ===== RESET FIX ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =========================
+   NAV + HAMBURGER (FIXED)
+   ========================= */
+
+/* Base nav */
+nav {
+    position: relative;
+}
+
+/* Menu desktop */
+.nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+/* Hidden checkbox */
+#nav-toggle {
+    display: none;
+}
+
+/* Hamburger icon */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+    z-index: 300;
+}
+
+.hamburger span {
+    width: 26px;
+    height: 3px;
+    background: #FFD700;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* =========================
+   MOBILE NAV
+   ========================= */
+@media (max-width: 768px) {
+
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-menu {
+        display: none;
+        position: absolute;
+        top: 90px;
+        right: 0;
+        background: #1B1B17;
+        flex-direction: column;
+        gap: 18px;
+        padding: 20px 24px;
+        border-radius: 14px;
+        border: 1px solid #D4AF37;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    }
+
+    /* 🔑 THIS IS THE FIX */
+    nav input#nav-toggle:checked ~ .nav-menu {
+        display: flex;
+    }
+}
