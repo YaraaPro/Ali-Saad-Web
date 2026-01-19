@@ -7,10 +7,49 @@
 }
 
 body {
-    background-color: #1B1B17;
+    background-color: #221402;
     color: #F5F5F5;
     line-height: 1.6;
 }
+
+/* Hamburger */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.hamburger span {
+    height: 3px;
+    width: 25px;
+    background: #FFD700;
+    border-radius: 2px;
+}
+
+/* Mobile Nav */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        gap: 15px;
+        display: none; /* hidden by default */
+    }
+
+    nav ul.active {
+        display: flex;
+        background: #1B1B17;
+        position: absolute;
+        top: 80px;
+        right: 20px;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+}
+
 
 /* Links */
 a {
@@ -48,7 +87,7 @@ a:hover {
 
 /* Header */
 header {
-    background: #1B1B17;
+    background: #221402;
     position: sticky;
     top: 0;
     z-index: 100;
@@ -74,7 +113,12 @@ nav ul li a.active {
 
 /* Logo */
 .logo img {
-    height: 50px;
+    height: 80px; /* bigger than before */
+    transition: transform 0.3s;
+}
+
+.logo img:hover {
+    transform: scale(1.05); /* subtle hover effect */
 }
 
 /* Hero */
@@ -152,7 +196,7 @@ nav ul li a.active {
 }
 
 .service-card {
-    background: #2B2B22;
+    background: #221402;
     padding: 30px;
     border-radius: 15px;
     width: 300px;
@@ -200,7 +244,7 @@ nav ul li a.active {
 
 /* Footer */
 footer {
-    background: #1B1B17;
+    background: #221402;
     border-top: 1px solid #D4AF37;
     padding: 40px 0;
     text-align: center;

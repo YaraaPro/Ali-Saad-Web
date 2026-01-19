@@ -13,13 +13,19 @@
       <div class="logo">
         <a href="index.html"><img src="assets/logo.png" alt="Ali Saad Logo"></a>
       </div>
-      <nav>
+      <nav id="nav-menu">
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="services.html">Services</a></li>
           <li><a href="contact.html" class="active">Contact</a></li>
         </ul>
+        <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
       </nav>
     </div>
   </header>
@@ -39,7 +45,7 @@
       <div class="contact-info">
         <h3>Contact Info</h3>
         <p>Email: info@alisaad.com</p>
-        <p>Phone: +123 456 7890</p>
+        <p>Phone: +961 03 647 861</p>
         <p>Address: 123 Luxury St, Business City</p>
         <div class="socials">
           <a href="#">FB</a>
@@ -61,5 +67,16 @@
       <p>© 2026 Ali Saad Office. All Rights Reserved.</p>
     </div>
   </footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const navMenu = document.getElementById('nav-menu').querySelector('ul');
+
+  hamburger.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+  });
+</script>
+
+
 </body>
 </html>

@@ -14,12 +14,19 @@
         <a href="index.html"><img src="assets/logo.png" alt="Ali Saad Logo"></a>
       </div>
       <nav>
+     <nav id="nav-menu">
         <ul>
           <li><a href="index.html" class="active">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="services.html">Services</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
+        <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
       </nav>
     </div>
   </header>
@@ -40,8 +47,19 @@
         <a href="services.html">Services</a>
         <a href="contact.html">Contact</a>
       </div>
-      <p>© 2026 Ali Saad Office. All Rights Reserved.</p>
+      <p>© 2026 Ali Saad Office. All Rights </p>
     </div>
   </footer>
+
+  <script>
+  const hamburger = document.getElementById('hamburger');
+  const navMenu = document.getElementById('nav-menu').querySelector('ul');
+
+  hamburger.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+  });
+</script>
+
+
 </body>
 </html>
