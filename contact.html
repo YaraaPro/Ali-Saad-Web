@@ -43,19 +43,32 @@
       <h2>Get in Touch</h2>
 
       <form id="whatsapp-form">
-        <textarea
-          id="message"
-          placeholder="Your Message"
-          rows="5"
-          required
-        ></textarea>
 
-        <button type="submit" class="btn">Send Message</button>
-      </form>
+  <select id="service" required>
+    <option value="" disabled selected>Select a Service</option>
+    <option value="Accounting">Accounting</option>
+    <option value="Social Media Management">Social Media Management</option>
+    <option value="Website Design & Development">Website Design & Development</option>
+    <option value="Branding & Visual Identity">Branding & Visual Identity</option>
+    <option value="Other">Other</option>
+  </select>
 
-    </div>
-  </div>
-<
+  <textarea
+    id="message"
+    placeholder="Tell us a bit about what you need..."
+    rows="5"
+    required
+  ></textarea>
+
+  <button type="submit" class="btn">
+  <span class="btn-text">Send Message</span>
+  <span class="btn-check">✓</span>
+</button>
+
+
+</form>
+
+
       <div class="contact-info">
         <h3>Contact Info</h3>
         
@@ -104,21 +117,42 @@
 </div>
   </footer>
 
-  <script>
+<script>
   const form = document.getElementById("whatsapp-form");
   const messageInput = document.getElementById("message");
+  const serviceSelect = document.getElementById("service");
+  const button = form.querySelector(".btn");
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const message = encodeURIComponent(messageInput.value);
-    const phoneNumber = "96103647861"; // NO +, NO SPACES
+    if (!serviceSelect.value || !messageInput.value) return;
 
-    const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
+    button.classList.add("success");
 
-    window.open(whatsappURL, "_blank");
+    setTimeout(() => {
+      const phoneNumber = "96103647861";
+
+      const fullMessage =
+`Hello 
+I contacted you through your website.
+
+ Service:
+${serviceSelect.value}
+
+ Message:
+${messageInput.value}
+`;
+
+      const encodedMessage = encodeURIComponent(fullMessage);
+      const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+      window.open(whatsappURL, "_blank");
+      button.classList.remove("success");
+    }, 700);
   });
 </script>
+
 
 </body>
 </html>

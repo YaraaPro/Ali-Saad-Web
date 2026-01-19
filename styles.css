@@ -191,9 +191,94 @@ header {
     border-radius: 10px;
 }
 
-.contact-form form button {
-    width: 100%;
+/* ===== GOLD SHIMMER BUTTON ===== */
+.btn {
+    position: relative;
+    overflow: hidden;
+
+    background: linear-gradient(
+        135deg,
+        #d26e03,
+        #f4d700,
+        #d26e03
+    );
+
+    color: #1b1b17;
+    font-weight: 600;
+    border-radius: 12px;
+    padding: 15px 30px;
+    border: none;
+    cursor: pointer;
+
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
+
+.btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 150%;
+    height: 100%;
+
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(113, 29, 29, 0.4),
+        transparent
+    );
+
+    transform: skewX(-20deg);
+}
+
+.btn:hover::before {
+    animation: shimmer 1.2s ease;
+}
+
+.btn:hover {
+    box-shadow: 0 0 25px rgba(177, 137, 52, 0.6);
+    transform: translateY(-1px);
+}
+
+@keyframes shimmer {
+    from {
+        left: -150%;
+    }
+    to {
+        left: 150%;
+    }
+}
+
+/* ===== SUCCESS MICRO ANIMATION ===== */
+.btn-check {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 1.5rem;
+    color: #1b1b17;
+
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.3s ease;
+}
+
+.btn.success {
+    background: linear-gradient(135deg, #7cffc4, #e6c98a);
+    box-shadow: 0 0 30px rgba(124, 255, 196, 0.6);
+}
+
+.btn.success .btn-text {
+    opacity: 0;
+}
+
+.btn.success .btn-check {
+    opacity: 1;
+    transform: scale(1);
+}
+
 
 /* Footer */
 footer {
@@ -468,6 +553,87 @@ header::after {
         transform: rotate(9deg) translate(-20px, -160px);
     }
 }
+
+/* ===== LUXURY SELECT MENU ===== */
+.contact-form select {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
+
+    background: linear-gradient(
+        135deg,
+        #1b1b17,
+        #2a241a
+    );
+
+    color: #e6c98a;
+    border: 1px solid rgba(230, 201, 138, 0.4);
+    border-radius: 12px;
+
+    font-family: inherit;
+    font-size: 1rem;
+
+    appearance: none;
+    cursor: pointer;
+
+    background-image:
+        linear-gradient(45deg, transparent 50%, #e6c98a 50%),
+        linear-gradient(135deg, #e6c98a 50%, transparent 50%);
+    background-position:
+        calc(100% - 25px) 22px,
+        calc(100% - 20px) 22px;
+    background-size: 6px 6px;
+    background-repeat: no-repeat;
+
+    transition: all 0.3s ease;
+}
+
+.contact-form select:hover {
+    border-color: #f0d48c;
+    box-shadow: 0 0 12px rgba(230, 201, 138, 0.25);
+}
+
+.contact-form select:focus {
+    outline: none;
+    border-color: #ffdf9e;
+    box-shadow:
+        0 0 15px rgba(255, 223, 158, 0.5),
+        inset 0 0 10px rgba(255, 223, 158, 0.15);
+}
+
+.contact-form textarea {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid rgba(189, 134, 16, 0.4);
+    background: #1b1b17;
+    color: #f5f5f5;
+    resize: none;
+}
+
+
+/* ===== FORM VALIDATION GLOW ===== */
+.contact-form textarea,
+.contact-form select {
+    transition: box-shadow 0.3s ease, border 0.3s ease;
+}
+
+.contact-form textarea:focus:valid,
+.contact-form select:focus:valid {
+    border-color: #f5ed00;
+    box-shadow:
+        0 0 12px rgba(60, 46, 1, 0.4),
+        inset 0 0 8px rgba(124, 255, 196, 0.2);
+}
+
+.contact-form textarea:focus:invalid,
+.contact-form select:focus:invalid {
+    border-color: #f29a02;
+    box-shadow:
+        0 0 10px rgba(255, 122, 122, 0.4),
+        inset 0 0 8px rgba(255, 122, 122, 0.2);
+}
+
 
 /* ===== RESET FIX ===== */
 * {
