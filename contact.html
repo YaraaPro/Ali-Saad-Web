@@ -37,22 +37,28 @@
   </header>
 
   <!-- Contact Section -->
-  <section class="contact">
-    <div class="container contact-container">
-      <div class="contact-form">
-        <h2>Get in Touch</h2>
-        <form>
-          <input type="text" placeholder="Your Name" required>
-          <input type="email" placeholder="Your Email" required>
-          <textarea placeholder="Your Message" rows="5" required></textarea>
-          <button type="submit" class="btn">Send Message</button>
-        </form>
-      </div>
+<section class="contact">
+  <div class="container contact-container">
+    <div class="contact-form">
+      <h2>Get in Touch</h2>
 
+      <form id="whatsapp-form">
+        <textarea
+          id="message"
+          placeholder="Your Message"
+          rows="5"
+          required
+        ></textarea>
 
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+
+    </div>
+  </div>
+<
       <div class="contact-info">
         <h3>Contact Info</h3>
-        <p>Email: info@alisaad.com</p>
+        
         <p>Phone: 
         <a href="https://wa.me/+96103647861" target="_blank" aria-label="WhatsApp">
         +961 03 647 861
@@ -97,6 +103,22 @@
     </a>
 </div>
   </footer>
+
+  <script>
+  const form = document.getElementById("whatsapp-form");
+  const messageInput = document.getElementById("message");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const message = encodeURIComponent(messageInput.value);
+    const phoneNumber = "96103647861"; // NO +, NO SPACES
+
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
+
+    window.open(whatsappURL, "_blank");
+  });
+</script>
 
 </body>
 </html>
