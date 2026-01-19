@@ -101,11 +101,15 @@ header {
     padding: 20px 0;
 }
 
+nav {
+    position: relative;
+}
+
 nav ul {
+    list-style: none;
     display: flex;
     gap: 25px;
 }
-
 nav ul li a.active {
     color: #FFD700;
     font-weight: bold;
@@ -278,13 +282,33 @@ footer {
         gap: 30px;
     }
 
-    nav ul {
-        flex-direction: column;
-        gap: 15px;
-    }
+  nav {
+    position: relative;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
 
     .hero h1 {
         font-size: 2rem;
         padding: 0 20px;
     }
 }
+
+/* ===== MOBILE NAV FIX ===== */
+@media (max-width: 768px) {
+
+    nav ul {
+        display: none; /* HIDE normal menu */
+        flex-direction: column;
+        background: #1B1B17;
+        position: absolute;
+        top: 90px;
+        right: 0;
+        padding: 20px;
+        border-radius: 12px;
+        border: 1
+    }}
