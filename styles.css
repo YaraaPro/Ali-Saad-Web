@@ -198,9 +198,9 @@ header {
 
     background: linear-gradient(
         135deg,
-        #d26e03,
-        #f4d700,
-        #d26e03
+        #73410c,
+        #eadc9b,
+        #73410c
     );
 
     color: #1b1b17;
@@ -266,8 +266,8 @@ header {
 }
 
 .btn.success {
-    background: linear-gradient(135deg, #7cffc4, #e6c98a);
-    box-shadow: 0 0 30px rgba(124, 255, 196, 0.6);
+    background: linear-gradient(135deg, #f39e00, #ffea02);
+    box-shadow: 0 0 30px rgba(255, 251, 0, 0.6);
 }
 
 .btn.success .btn-text {
@@ -555,6 +555,22 @@ header::after {
 }
 
 /* ===== LUXURY SELECT MENU ===== */
+.contact-form form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contact-form textarea,
+.contact-form select {
+    width: 100%;
+}
+
+.contact-form .btn {
+    margin-top: 25px;
+}
+
+
 .contact-form select {
     width: 100%;
     padding: 15px;
@@ -634,6 +650,142 @@ header::after {
         inset 0 0 8px rgba(255, 122, 122, 0.2);
 }
 
+.contact-info {
+    text-align: center;
+}
+
+.contact-info p,
+.contact-info a {
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* ===== THEMED SELECT MENU ===== */
+select {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid rgba(212, 175, 55, 0.6);
+
+    background-color: #2a1c0b;
+    color: #FFD700;
+
+    font-size: 1rem;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    background-image:
+        linear-gradient(45deg, transparent 50%, #FFD700 50%),
+        linear-gradient(135deg, #FFD700 50%, transparent 50%);
+    background-position:
+        calc(100% - 22px) calc(1.3em),
+        calc(100% - 16px) calc(1.3em);
+    background-size: 6px 6px;
+    background-repeat: no-repeat;
+}
+
+/* Options */
+select option {
+    background: #221402;
+    color: #d29e00;
+}
+
+/* ===== SELECT OPTION HOVER ONLY ===== */
+select option:hover {
+    background-color: #FFD700;
+    color: #2a1c0b;
+}
+
+/* Selected option goes back to dark */
+select option:checked {
+    background-color: #221402;
+    color: #FFD700;
+}
+
+/* ===== GOLD GRADIENT HEADINGS ===== */
+.contact-form h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+
+    background: linear-gradient(
+        45deg,
+        #745014,
+        #f5e1b1,
+        #614406
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    text-shadow: 0 0 12px rgba(255, 190, 80, 0.35);
+}
+
+.contact-form h2 {
+    background-size: 200% 200%;
+    animation: goldFlow 6s ease infinite;
+}
+
+@keyframes goldFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
+/* ===== GOLD GRADIENT HEADINGS ===== */
+.contact-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+
+    background: linear-gradient(
+        45deg,
+        #745014,
+        #f5e1b1,
+        #614406
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    text-shadow: 0 0 12px rgba(255, 190, 80, 0.35);
+}
+
+.contact-info h3 {
+    background-size: 200% 200%;
+    animation: goldFlow 6s ease infinite;
+}
+
+@keyframes goldFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
+/* ===== GOLD GRADIENT TEXTS ===== */
+.contact-info p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    margin-bottom: 0px;
+
+    background: linear-gradient(
+        45deg,
+        #745014,
+        #f5e1b1,
+        #614406
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    text-shadow: 0 0 12px rgba(255, 190, 80, 0.35);
+}
 
 /* ===== RESET FIX ===== */
 * {
@@ -776,4 +928,54 @@ nav {
     transition:
         opacity 0.4s cubic-bezier(.4,0,.2,1),
         transform 0.4s cubic-bezier(.4,0,.2,1);
+}
+
+/* ===== GOLD BURST PARTICLES ===== */
+.btn-burst {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.btn-burst span {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: radial-gradient(circle, #ffffff, #ffffff);
+    border-radius: 50%;
+    opacity: 0;
+}
+
+.btn.success .btn-burst span {
+    animation: burst 700ms ease-out forwards;
+}
+
+.btn-burst span:nth-child(1) { top: 50%; left: 50%; animation-delay: 0ms; }
+.btn-burst span:nth-child(2) { top: 50%; left: 50%; animation-delay: 80ms; }
+.btn-burst span:nth-child(3) { top: 50%; left: 50%; animation-delay: 160ms; }
+
+@keyframes burst {
+    0% {
+        transform: translate(0, 0) scale(0.3);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(
+            calc(-40px + 80px * var(--x)),
+            calc(-40px + 80px * var(--y))
+        ) scale(0.9);
+        opacity: 0;
+    }
+}
+
+/* ===== PAGE FADE ===== */
+body {
+    opacity: 0;
+    animation: pageFadeIn 0.7s ease forwards;
+}
+
+@keyframes pageFadeIn {
+    to {
+        opacity: 1;
+    }
 }

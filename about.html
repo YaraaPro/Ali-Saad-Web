@@ -72,6 +72,23 @@
 </div>
   </footer>
 
+  <script>
+document.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", e => {
+        const href = link.getAttribute("href");
+
+        if (!href || href.startsWith("#") || link.target === "_blank") return;
+
+        e.preventDefault();
+        document.body.style.opacity = 0;
+
+        setTimeout(() => {
+            window.location.href = href;
+        }, 300);
+    });
+});
+</script>
+
 
 </body>
 </html>

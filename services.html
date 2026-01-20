@@ -55,7 +55,7 @@
           <p>Engaging social media strategies to grow your brand, connect with your audience, and boost online presence.</p>
         </div>
         <div class="service-card">
-          <h3>Graphic Media</h3>
+          <h3>Graphic Design</h3>
           <p>Modern and elegant designs that bring your business to life with a beating visual heart.</p>
         </div>
         <div class="service-card">
@@ -100,6 +100,22 @@
 </div>
   </footer>
 
+<script>
+document.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", e => {
+        const href = link.getAttribute("href");
+
+        if (!href || href.startsWith("#") || link.target === "_blank") return;
+
+        e.preventDefault();
+        document.body.style.opacity = 0;
+
+        setTimeout(() => {
+            window.location.href = href;
+        }, 300);
+    });
+});
+</script>
 
 
 </body>

@@ -46,10 +46,13 @@
 
   <select id="service" required>
     <option value="" disabled selected>Select a Service</option>
+    <option value="POS System">POS System</option>
     <option value="Accounting">Accounting</option>
     <option value="Social Media Management">Social Media Management</option>
-    <option value="Website Design & Development">Website Design & Development</option>
     <option value="Branding & Visual Identity">Branding & Visual Identity</option>
+    <option value="Photography">Photography</option>
+    <option value="Qr Menu Design & Development">Qr Menu Design & Development</option>
+    <option value="Printing">Printing</option>
     <option value="Other">Other</option>
   </select>
 
@@ -61,28 +64,32 @@
   ></textarea>
 
   <button type="submit" class="btn">
-  <span class="btn-text">Send Message</span>
-  <span class="btn-check">✓</span>
+    <span class="btn-text">Send Message</span>
+    <span class="btn-check">✓</span>
+
+    <span class="btn-burst">
+        <span style="--x:0.1; --y:0.8"></span>
+        <span style="--x:0.8; --y:0.2"></span>
+        <span style="--x:0.4; --y:0.5"></span>
+    </span>
 </button>
-
-
 </form>
 
-
+<br>
       <div class="contact-info">
         <h3>Contact Info</h3>
         
-        <p>Phone: 
+        <p>Phone:</p>
         <a href="https://wa.me/+96103647861" target="_blank" aria-label="WhatsApp">
         +961 03 647 861
     </a>
-        </p>
-        <p>Address: 
+      
+        <p>Address:</p>
           <a href="https://www.google.com/maps" target="_blank" aria-label="Location">
          Nabatieh - Center Fahed - First floor
     </a>
-        </p>
-        <p>Instagram:
+        
+        <p>Instagram:</p>
         <a href="https://www.instagram.com/alisaad.office" target="_blank" aria-label="Instagram">
         alisaad.office
     </a></p>
@@ -151,6 +158,23 @@ ${messageInput.value}
       button.classList.remove("success");
     }, 700);
   });
+
+  
+document.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", e => {
+        const href = link.getAttribute("href");
+
+        if (!href || href.startsWith("#") || link.target === "_blank") return;
+
+        e.preventDefault();
+        document.body.style.opacity = 0;
+
+        setTimeout(() => {
+            window.location.href = href;
+        }, 300);
+    });
+});
+
 </script>
 
 
