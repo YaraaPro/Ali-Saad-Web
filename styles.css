@@ -143,26 +143,7 @@ nav {
         inset: -40%; /* smaller overflow on mobile */
     }
 
-    select {
-    background: linear-gradient(135deg, #1b1b17, #2a241a);
-    color: #FFD700;
-}
-
-select option {
-    background: #221402;
-    color: #d29e00;
-}
-
-select option:hover {
-    background-color: #FFD700; 
-    color: #2a1c0b;
-}
-
-select:hover {
-    border-color: #FFD700;
-    box-shadow: 0 0 12px rgba(255, 215, 0, 0.3);
-}
-
+    
 
 /* ===== MENU ITEM ENTRANCE ===== */
 
@@ -841,41 +822,94 @@ header::after {
 }
 
 /* ===== THEMED SELECT MENU ===== */
-select {
+.custom-select-wrapper {
     width: 100%;
+    max-width: 500px;
+    margin-bottom: 15px;
+    position: relative;
+    font-family: inherit;
+}
+
+.custom-select {
+    position: relative;
+    user-select: none;
+}
+
+.select-box {
+    background: linear-gradient(135deg, #1b1b17, #2a241a);
+    color: #FFD700;
+    border-radius: 12px;
     padding: 15px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgba(212, 175, 55, 0.6);
+    transition: box-shadow 0.3s ease;
+}
+
+.select-box:hover {
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.3);
+}
+
+.options {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background: #221402;
     border-radius: 12px;
     border: 1px solid rgba(212, 175, 55, 0.6);
+    top: 100%;
+    left: 0;
+    display: none; /* hidden by default */
+    z-index: 999; /* make sure it’s above everything */
+}
 
-    background-color: #2a1c0b;
+.options.show {
+    display: block;
+}
+
+
+.options li {
+    padding: 12px 15px;
+    cursor: pointer;
     color: #FFD700;
-
-    font-size: 1rem;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-
-    background-image:
-        linear-gradient(45deg, transparent 50%, #FFD700 50%),
-        linear-gradient(135deg, #FFD700 50%, transparent 50%);
-    background-position:
-        calc(100% - 22px) calc(1.3em),
-        calc(100% - 16px) calc(1.3em);
-    background-size: 6px 6px;
-    background-repeat: no-repeat;
+    transition: background 0.3s, color 0.3s;
 }
 
-/* Options */
-select option {
-    background: #221402;
-    color: #d29e00;
+.options li:hover {
+    background-color: #FFD700;
+    color: #2a1c0b;
 }
 
-/* ===== SELECT OPTION HOVER COLORS ===== */
-select option:hover,
-select option:checked {
-    background-color: #FFD700; /* golden yellow */
-    color: #2a1c0b; /* blackish brown */
+/* Selected items */
+.options li.selected {
+    background-color: #D4AF37;
+    color: #1b1b17;
+}
+
+.select-box i {
+    transition: transform 0.3s;
+}
+
+.select-box.open i {
+    transform: rotate(-180deg);
+}
+
+.options {
+    transition: max-height 0.35s ease, opacity 0.35s ease;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+}
+
+.options.show {
+    max-height: 200px;
+    opacity: 1;
 }
 
 

@@ -44,17 +44,26 @@
 
       <form id="whatsapp-form">
 
-  <select id="service" required>
-    <option value="" disabled selected>Select a Service</option>
-    <option value="POS System">POS System</option>
-    <option value="Accounting">Accounting</option>
-    <option value="Social Media Management">Social Media Management</option>
-    <option value="Branding & Visual Identity">Branding & Visual Identity</option>
-    <option value="Photography">Photography</option>
-    <option value="Qr Menu Design & Development">Qr Menu Design & Development</option>
-    <option value="Printing">Printing</option>
-    <option value="Other">Other</option>
-  </select>
+ <div class="custom-select-wrapper">
+ 
+  <div class="custom-select" id="service">
+    <div class="select-box">
+      <span class="placeholder">Select Service(s)</span>
+      <i class="fa fa-chevron-down"></i>
+    </div>
+    <ul class="options">
+      <li data-value="POS System">POS System</li>
+      <li data-value="Accounting">Accounting</li>
+      <li data-value="Social Media Management">Social Media Management</li>
+      <li data-value="Branding & Visual Identity">Branding & Visual Identity</li>
+      <li data-value="Photography">Photography</li>
+      <li data-value="Qr Menu Design & Development">Qr Menu Design & Development</li>
+      <li data-value="Printing">Printing</li>
+      <li data-value="Other">Other</li>
+    </ul>
+  </div>
+</div>
+
 
   <textarea
     id="message"
@@ -125,40 +134,81 @@
   </footer>
 
 <script>
-  const form = document.getElementById("whatsapp-form");
-  const messageInput = document.getElementById("message");
-  const serviceSelect = document.getElementById("service");
-  const button = form.querySelector(".btn");
+const form = document.getElementById("whatsapp-form");
+const messageInput = document.getElementById("message");
+const selectWrapper = document.getElementById("service");
+const selectBox = selectWrapper.querySelector(".select-box");
+const options = selectWrapper.querySelectorAll(".options li");
+const button = form.querySelector(".btn");
 
-  form.addEventListener("submit", function (e) {
+// Store selected values
+let selectedServices = [];
+
+// Toggle options dropdown
+selectBox.addEventListener("click", () => {
+    selectWrapper.querySelector(".options").classList.toggle("show");
+    selectBox.classList.toggle("open");
+});
+
+// Click outside to close
+document.addEventListener("click", (e) => {
+    if (!selectWrapper.contains(e.target)) {
+        selectWrapper.querySelector(".options").classList.remove("show");
+        selectBox.classList.remove("open");
+    }
+});
+
+// Option click
+options.forEach(option => {
+    option.addEventListener("click", () => {
+        const value = option.dataset.value;
+        if (selectedServices.includes(value)) {
+            selectedServices = selectedServices.filter(s => s !== value);
+            option.classList.remove("selected");
+        } else {
+            selectedServices.push(value);
+            option.classList.add("selected");
+        }
+
+        // Update placeholder text
+        const placeholder = selectBox.querySelector(".placeholder");
+        placeholder.textContent = selectedServices.length 
+            ? selectedServices.join(", ") 
+            : "Select Service(s)";
+    });
+});
+
+// Form submit
+form.addEventListener("submit", function(e) {
     e.preventDefault();
 
-    if (!serviceSelect.value || !messageInput.value) return;
+    if (!selectedServices.length || !messageInput.value.trim()) return;
 
     button.classList.add("success");
 
     setTimeout(() => {
-      const phoneNumber = "96103647861";
-
-      const fullMessage =
-`Hello 
+        const phoneNumber = "96103647861";
+        const fullMessage = `Hello
 I contacted you through your website.
 
- Service:
-${serviceSelect.value}
+Service(s):
+${selectedServices.join(", ")}
 
- Message:
+Message:
 ${messageInput.value}
 `;
 
-      const encodedMessage = encodeURIComponent(fullMessage);
-      const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+        const encodedMessage = encodeURIComponent(fullMessage);
+        const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 
-      window.open(whatsappURL, "_blank");
-      button.classList.remove("success");
+        window.open(whatsappURL, "_blank");
+        button.classList.remove("success");
+        messageInput.value = "";
+        selectedServices = [];
+        options.forEach(opt => opt.classList.remove("selected"));
+        selectBox.querySelector(".placeholder").textContent = "Select Service(s)";
     }, 700);
-  });
-
+});
   
 document.querySelectorAll("a").forEach(link => {
     link.addEventListener("click", e => {
