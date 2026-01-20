@@ -143,7 +143,26 @@ nav {
         inset: -40%; /* smaller overflow on mobile */
     }
 
-    
+    select {
+    background: linear-gradient(135deg, #1b1b17, #2a241a);
+    color: #FFD700;
+}
+
+select option {
+    background: #221402;
+    color: #d29e00;
+}
+
+select option:hover {
+    background-color: #FFD700; 
+    color: #2a1c0b;
+}
+
+select:hover {
+    border-color: #FFD700;
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.3);
+}
+
 
 /* ===== MENU ITEM ENTRANCE ===== */
 
