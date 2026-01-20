@@ -821,13 +821,13 @@ header::after {
     margin-bottom: 10px;
 }
 
-/* ===== THEMED SELECT MENU ===== */
 .custom-select-wrapper {
     width: 100%;
     max-width: 500px;
     margin-bottom: 15px;
-    position: relative;
+    position: relative; /* important for absolute dropdown */
     font-family: inherit;
+    z-index: 200;
 }
 
 .custom-select {
@@ -846,6 +846,7 @@ header::after {
     align-items: center;
     border: 1px solid rgba(212, 175, 55, 0.6);
     transition: box-shadow 0.3s ease;
+    z-index: 200;
 }
 
 .select-box:hover {
@@ -853,24 +854,15 @@ header::after {
 }
 
 .options {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    position: absolute;
-    width: 100%;
-    max-height: 200px;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
     overflow-y: auto;
-    background: #221402;
-    border-radius: 12px;
-    border: 1px solid rgba(212, 175, 55, 0.6);
-    top: 100%;
-    left: 0;
-    display: none; /* hidden by default */
-    z-index: 999; /* make sure it’s above everything */
 }
 
 .options.show {
-    display: block;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 
@@ -879,12 +871,42 @@ header::after {
     cursor: pointer;
     color: #FFD700;
     transition: background 0.3s, color 0.3s;
+    white-space: nowrap;
 }
 
 .options li:hover {
     background-color: #FFD700;
     color: #2a1c0b;
 }
+
+.options li.selected {
+    background-color: #D4AF37;
+    color: #1b1b17;
+}
+
+.select-box i {
+    transition: transform 0.3s;
+}
+
+.select-box.open i {
+    transform: rotate(-180deg);
+}
+
+/* Optional scrollbar style */
+.options::-webkit-scrollbar {
+    width: 6px;
+}
+
+.options::-webkit-scrollbar-track {
+    background: #1b1b17;
+    border-radius: 6px;
+}
+
+.options::-webkit-scrollbar-thumb {
+    background: #FFD700;
+    border-radius: 6px;
+}
+
 
 /* Selected items */
 .options li.selected {

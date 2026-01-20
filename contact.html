@@ -134,34 +134,32 @@
   </footer>
 
 <script>
-const form = document.getElementById("whatsapp-form");
-const messageInput = document.getElementById("message");
 const selectWrapper = document.getElementById("service");
 const selectBox = selectWrapper.querySelector(".select-box");
+const optionsContainer = selectWrapper.querySelector(".options");
 const options = selectWrapper.querySelectorAll(".options li");
-const button = form.querySelector(".btn");
 
-// Store selected values
 let selectedServices = [];
 
-// Toggle options dropdown
+// Toggle dropdown when clicking anywhere on the box
 selectBox.addEventListener("click", () => {
-    selectWrapper.querySelector(".options").classList.toggle("show");
+    optionsContainer.classList.toggle("show");
     selectBox.classList.toggle("open");
 });
 
 // Click outside to close
 document.addEventListener("click", (e) => {
     if (!selectWrapper.contains(e.target)) {
-        selectWrapper.querySelector(".options").classList.remove("show");
+        optionsContainer.classList.remove("show");
         selectBox.classList.remove("open");
     }
 });
 
-// Option click
+// Option selection
 options.forEach(option => {
     option.addEventListener("click", () => {
         const value = option.dataset.value;
+
         if (selectedServices.includes(value)) {
             selectedServices = selectedServices.filter(s => s !== value);
             option.classList.remove("selected");
@@ -170,13 +168,20 @@ options.forEach(option => {
             option.classList.add("selected");
         }
 
-        // Update placeholder text
         const placeholder = selectBox.querySelector(".placeholder");
         placeholder.textContent = selectedServices.length 
             ? selectedServices.join(", ") 
             : "Select Service(s)";
     });
 });
+
+
+        // Update placeholder text
+        const placeholder = selectBox.querySelector(".placeholder");
+        placeholder.textContent = selectedServices.length 
+            ? selectedServices.join(", ") 
+            : "Select Service(s)";
+    
 
 // Form submit
 form.addEventListener("submit", function(e) {
