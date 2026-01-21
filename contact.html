@@ -30,8 +30,9 @@
         <li><a href="services.html">Services</a></li>
         <li><a href="contact.html">Contact</a></li>
     </ul>
-</nav>
+    <label for="nav-toggle" class="menu-backdrop"></label>
 
+</nav>
 
     </div>
   </header>
@@ -134,56 +135,67 @@
   </footer>
 
 <script>
-const selectWrapper = document.getElementById("service");
-const selectBox = selectWrapper.querySelector(".select-box");
-const optionsContainer = selectWrapper.querySelector(".options");
-const options = selectWrapper.querySelectorAll(".options li");
+document.addEventListener("DOMContentLoaded", () => {
 
-let selectedServices = [];
+  const wrapper = document.querySelector(".custom-select-wrapper");
+  if (!wrapper) return; // 👈 prevents crashes on other pages
 
-// Toggle dropdown when clicking anywhere on the box
-selectBox.addEventListener("click", () => {
-    optionsContainer.classList.toggle("show");
-    selectBox.classList.toggle("open");
+  const selectBox = wrapper.querySelector(".select-box");
+  const options = wrapper.querySelector(".options");
+  const optionItems = options.querySelectorAll("li");
+  const placeholder = selectBox.querySelector(".placeholder");
+
+  let selectedValues = [];
+
+  // Toggle dropdown
+  selectBox.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isOpen = options.classList.contains("show");
+
+      options.classList.toggle("show", !isOpen);
+      selectBox.classList.toggle("open", !isOpen);
+      document.body.classList.toggle("dropdown-open", !isOpen);
+
+      console.log("dropdown toggled", !isOpen);
+
+  });
+
+  // Close when clicking outside
+  document.addEventListener("click", () => {
+      options.classList.remove("show");
+      selectBox.classList.remove("open");
+      document.body.classList.remove("dropdown-open");
+  });
+
+  // Multi-select
+  optionItems.forEach(item => {
+      item.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const value = item.dataset.value;
+
+          item.classList.toggle("selected");
+
+          if (selectedValues.includes(value)) {
+              selectedValues = selectedValues.filter(v => v !== value);
+          } else {
+              selectedValues.push(value);
+          }
+
+          placeholder.textContent =
+              selectedValues.length
+              ? selectedValues.join(", ")
+              : "Select Service(s)";
+      });
+  });
+
 });
 
-// Click outside to close
-document.addEventListener("click", (e) => {
-    if (!selectWrapper.contains(e.target)) {
-        optionsContainer.classList.remove("show");
-        selectBox.classList.remove("open");
-    }
-});
 
-// Option selection
-options.forEach(option => {
-    option.addEventListener("click", () => {
-        const value = option.dataset.value;
+// WhatsApp submit
+const form = document.getElementById("whatsapp-form");
+const messageInput = document.getElementById("message");
+const button = form.querySelector(".btn");
 
-        if (selectedServices.includes(value)) {
-            selectedServices = selectedServices.filter(s => s !== value);
-            option.classList.remove("selected");
-        } else {
-            selectedServices.push(value);
-            option.classList.add("selected");
-        }
-
-        const placeholder = selectBox.querySelector(".placeholder");
-        placeholder.textContent = selectedServices.length 
-            ? selectedServices.join(", ") 
-            : "Select Service(s)";
-    });
-});
-
-
-        // Update placeholder text
-        const placeholder = selectBox.querySelector(".placeholder");
-        placeholder.textContent = selectedServices.length 
-            ? selectedServices.join(", ") 
-            : "Select Service(s)";
-    
-
-// Form submit
 form.addEventListener("submit", function(e) {
     e.preventDefault();
 
@@ -193,6 +205,7 @@ form.addEventListener("submit", function(e) {
 
     setTimeout(() => {
         const phoneNumber = "96103647861";
+
         const fullMessage = `Hello
 I contacted you through your website.
 
@@ -203,33 +216,19 @@ Message:
 ${messageInput.value}
 `;
 
-        const encodedMessage = encodeURIComponent(fullMessage);
-        const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+        const whatsappURL =
+          `https://wa.me/${phoneNumber}?text=${encodeURIComponent(fullMessage)}`;
 
         window.open(whatsappURL, "_blank");
+
+        // reset
         button.classList.remove("success");
         messageInput.value = "";
         selectedServices = [];
-        options.forEach(opt => opt.classList.remove("selected"));
-        selectBox.querySelector(".placeholder").textContent = "Select Service(s)";
+        optionItems.forEach(opt => opt.classList.remove("selected"));
+        placeholder.textContent = "Select Service(s)";
     }, 700);
 });
-  
-document.querySelectorAll("a").forEach(link => {
-    link.addEventListener("click", e => {
-        const href = link.getAttribute("href");
-
-        if (!href || href.startsWith("#") || link.target === "_blank") return;
-
-        e.preventDefault();
-        document.body.style.opacity = 0;
-
-        setTimeout(() => {
-            window.location.href = href;
-        }, 300);
-    });
-});
-
 </script>
 
 

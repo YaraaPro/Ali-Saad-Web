@@ -3,6 +3,8 @@ body {
     background-color: #221402;
     color: #F5F5F5;
     line-height: 1.6;
+    position: relative;
+    overflow-x: hidden;
 }
 
 /* ===== RESET FIX ===== */
@@ -17,6 +19,25 @@ html, body {
     overflow-x: hidden;
 }
 
+/* Lock body scroll ONLY for dropdown */
+html.dropdown-open,
+body.dropdown-open {
+    overflow: hidden !important;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+}
+
+}
+
+header::after,
+footer::before,
+footer::after {
+    position: fixed;   /* 🚨 WAS absolute */
+    inset: -80%;
+}
+
+
 /* ===== NAV BASE ===== */
 
 nav {
@@ -27,6 +48,8 @@ nav {
     list-style: none;
     display: flex;
     gap: 25px;
+    position: relative;
+    z-index: 6000;
 }
 
 /* ===== HIDDEN CHECKBOX ===== */
@@ -43,7 +66,7 @@ nav {
     flex-direction: column;
     gap: 6px;
     cursor: pointer;
-    z-index: 200;
+    z-index: 8000;
 }
 
 .hamburger span {
@@ -52,6 +75,25 @@ nav {
     background: #FFD700;
     border-radius: 2px;
 }
+
+/* ===== BACKDROP BLUR OVERLAY ===== */
+.menu-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    z-index: 2500; /* below menu, above page */
+}
+
+/* When menu open */
+#nav-toggle:checked ~ .menu-backdrop {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 
 /* ===== MOBILE FIX ===== */
 @media (max-width: 768px) {
@@ -70,6 +112,8 @@ nav {
         border-radius: 14px;
         border: 1px solid #D4AF37;
         box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+        position: relative;
+        z-index: 6000;
     }
 
     /* Show hamburger */
@@ -98,6 +142,7 @@ nav {
         border-radius: 14px;
         border: 1px solid #D4AF37;
         box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+         z-index: 3000;
 
         /* animation state */
         opacity: 0;
@@ -204,10 +249,11 @@ header {
     background: #221402;
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 5000; /* menu always above everything */
     border-bottom: 1px solid #D4AF37;
-    overflow: visible; /* ← FIX */
+    overflow: visible;
 }
+
 
 .nav-container {
     display: flex;
@@ -287,6 +333,7 @@ header {
     font-size: 2.5rem;
     color: #FFD700;
     margin-bottom: 20px;
+    
 }
 
 /* Services */
@@ -300,6 +347,7 @@ header {
     font-size: 2.5rem;
     color: #FFD700;
     margin-bottom: 50px;
+    
 }
 
 .service-grid {
@@ -399,7 +447,10 @@ header {
 .btn:hover {
     box-shadow: 0 0 25px rgba(177, 137, 52, 0.6);
     transform: translateY(-1px);
+    color: #070601; /* set a visible color on hover */
 }
+
+
 
 @keyframes shimmer {
     from {
@@ -854,16 +905,38 @@ header::after {
 }
 
 .options {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    position: absolute;
+    width: 100%;
+    top: calc(100% + 6px);
+    left: 0;
+
+    max-height: 240px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+
+    background: #221402;
+    border-radius: 12px;
+    border: 1px solid rgba(212, 175, 55, 0.6);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+
     opacity: 0;
     transform: translateY(-10px);
+    pointer-events: none;
+
     transition: opacity 0.3s ease, transform 0.3s ease;
-    overflow-y: auto;
+    z-index: 400;
 }
 
 .options.show {
     opacity: 1;
     transform: translateY(0);
+    pointer-events: auto;
 }
+
 
 
 .options li {
@@ -922,17 +995,7 @@ header::after {
     transform: rotate(-180deg);
 }
 
-.options {
-    transition: max-height 0.35s ease, opacity 0.35s ease;
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-}
 
-.options.show {
-    max-height: 200px;
-    opacity: 1;
-}
 
 
 /* ===== GOLD GRADIENT HEADINGS ===== */
@@ -940,6 +1003,7 @@ header::after {
     font-family: 'Playfair Display', serif;
     font-size: 1.8rem;
     margin-bottom: 20px;
+    text-align: center;
 
     background: linear-gradient(
         45deg,
@@ -1070,14 +1134,4 @@ body {
     }
 }
 
-/* ===== PAGE FADE ===== */
-body {
-    opacity: 0;
-    animation: pageFadeIn 0.7s ease forwards;
-}
 
-@keyframes pageFadeIn {
-    to {
-        opacity: 1;
-    }
-}
