@@ -87,6 +87,28 @@ document.querySelectorAll("a").forEach(link => {
         }, 300);
     });
 });
+
+const openMap = document.getElementById("openMap");
+const closeMap = document.getElementById("closeMap");
+const mapOverlay = document.getElementById("mapOverlay");
+
+openMap.addEventListener("click", () => {
+    mapOverlay.style.display = "flex";
+    document.body.style.overflow = "hidden";
+});
+
+closeMap.addEventListener("click", () => {
+    mapOverlay.style.display = "none";
+    document.body.style.overflow = "";
+});
+
+// close when clicking outside the map
+mapOverlay.addEventListener("click", (e) => {
+    if (e.target === mapOverlay) {
+        mapOverlay.style.display = "none";
+        document.body.style.overflow = "";
+    }
+});
 </script>
 
 

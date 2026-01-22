@@ -127,10 +127,27 @@
         alisaad.office
     </a>
     <br>
-    <a href="https://www.google.com/maps" target="_blank" aria-label="Location">
-        <i class="fas fa-location-dot"></i>
-        Nabatieh - Center Fahed - First floor
-    </a>
+    <!-- Location trigger -->
+<p class="map-trigger" id="openMap">
+    <i class="fas fa-location-dot"></i>
+    Nabatieh – Center Fahed – First floor
+</p>
+
+<!-- Map overlay -->
+<div class="map-overlay" id="mapOverlay">
+    <div class="map-box">
+        <button class="map-close" id="closeMap">&times;</button>
+
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d197.91822942584588!2d35.481983061158886!3d33.38325207798422!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151e95450076ad9b%3A0x341c4ca3dcafd09c!2sBoneless%20Nabatieh!5e1!3m2!1sen!2snl!4v1769070021220!5m2!1sen!2snl"
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </div>
+</div>
+
+
 </div>
   </footer>
 
@@ -270,6 +287,28 @@ ${messageInput.value}
         optionItems.forEach(o => o.classList.remove("selected"));
         placeholder.textContent = "Select Service(s)";
     }, 700);
+});
+
+const openMap = document.getElementById("openMap");
+const closeMap = document.getElementById("closeMap");
+const mapOverlay = document.getElementById("mapOverlay");
+
+openMap.addEventListener("click", () => {
+    mapOverlay.style.display = "flex";
+    document.body.style.overflow = "hidden";
+});
+
+closeMap.addEventListener("click", () => {
+    mapOverlay.style.display = "none";
+    document.body.style.overflow = "";
+});
+
+// close when clicking outside the map
+mapOverlay.addEventListener("click", (e) => {
+    if (e.target === mapOverlay) {
+        mapOverlay.style.display = "none";
+        document.body.style.overflow = "";
+    }
 });
 </script>
 
